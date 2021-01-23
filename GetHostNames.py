@@ -15,6 +15,7 @@ import requests
 domain = sys.argv[1]
 hosts = []
 m = MaltegoTransform()
+found = False
 
 
 try:
@@ -37,7 +38,8 @@ try:
             hostname = i.split(',')[0]
             ipaddress = i.split(',')[1]
             m.addEntity('maltego.DNSName', hostname)
-    else:
+            found = True
+    if not(found):
         m.addUIMessage("No results found from Host Search") 
 except Exception as e:
     m.addUIMessage(str(e))
